@@ -1,0 +1,14 @@
+curl -X POST "https://api2.arduino.cc/iot/v2/things/7ea1ea47-9ca5-4805-94eb-8185d489ac1a?force=true" \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2FwaTIuYXJkdWluby5jYy9pb3QiLCJhenAiOiJyeDBwaDVvckY1Y2RTZnhLdUFvZkI2Zkp0UUFHMWo5eCIsImV4cCI6MTY2NDUzNDA0NywiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIiwiaHR0cDovL2FyZHVpbm8uY2MvY2xpZW50X2lkIjoiYWF5dXNoX3Rlc3QiLCJodHRwOi8vYXJkdWluby5jYy9pZCI6IjNkMmQxMWEwLTc0YmEtNGI1OS05ZThiLWYyNjMwMzdkNjAwOSIsImh0dHA6Ly9hcmR1aW5vLmNjL3JhdGVsaW1pdCI6MTAsImh0dHA6Ly9hcmR1aW5vLmNjL3VzZXJuYW1lIjoibGlxdWltZWNoX3Rlc3RlciIsImlhdCI6MTY2NDUzMzc0Nywic3ViIjoicngwcGg1b3JGNWNkU2Z4S3VBb2ZCNmZKdFFBRzFqOXhAY2xpZW50cyJ9.xk7P0Q_9dymG-mZCyTU5XaeykcGyXQLKS95PIWx_S6E' \
+--header 'content-type: application/json' \
+--data-raw '
+{   
+    "device_id": "ea726baa-f244-495a-b70d-b779be76268f",
+    "id": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a",
+    "name": "aayush_thing_update_v3",
+    "user_id": "3d2d11a0-74ba-4b59-9e8b-f263037d6009",
+    "device_fqbn": "esp8266:esp8266:generic",
+    "device_name": "Liquimech_test",
+    "device_type": "login_and_secretkey_wifi",
+    "webhook_active": false
+}'

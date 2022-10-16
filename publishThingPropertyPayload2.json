@@ -1,0 +1,16 @@
+{
+    "href": "/iot/v1/things/7ea1ea47-9ca5-4805-94eb-8185d489ac1a/properties/722dc691-60e2-4615-bcc9-97c1ec0f0085",
+    "id": "722dc691-60e2-4615-bcc9-97c1ec0f0085",
+    "device_id": "ea726baa-f244-495a-b70d-b779be76268f",
+    "value": 47,
+    "name": "aayush_int_value",
+    "permission": "READ_WRITE",
+    "persist": true,
+    "tag": 3,
+    "thing_id": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a",
+    "thing_name": "aayush_thing",
+    "type": "INT",
+    "update_parameter": 0,
+    "update_strategy": "ON_CHANGE",
+    "variable_name": "aayush_int_value"
+}

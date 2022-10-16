@@ -1,0 +1,6 @@
+curl -X POST 'https://api2.arduino.cc/iot/v2/dashboards' \ 
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2FwaTIuYXJkdWluby5jYy9pb3QiLCJhenAiOiJyeDBwaDVvckY1Y2RTZnhLdUFvZkI2Zkp0UUFHMWo5eCIsImV4cCI6MTY2NDE5ODY2OSwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIiwiaHR0cDovL2FyZHVpbm8uY2MvY2xpZW50X2lkIjoiYWF5dXNoX3Rlc3QiLCJodHRwOi8vYXJkdWluby5jYy9pZCI6IjNkMmQxMWEwLTc0YmEtNGI1OS05ZThiLWYyNjMwMzdkNjAwOSIsImh0dHA6Ly9hcmR1aW5vLmNjL3JhdGVsaW1pdCI6MTAsImh0dHA6Ly9hcmR1aW5vLmNjL3VzZXJuYW1lIjoibGlxdWltZWNoX3Rlc3RlciIsImlhdCI6MTY2NDE5ODM2OSwic3ViIjoicngwcGg1b3JGNWNkU2Z4S3VBb2ZCNmZKdFFBRzFqOXhAY2xpZW50cyJ9._CjnPvgUFeI7gSUIalqwcAzGNqDzAiaDcrrJP4tQ60Y' \
+--header 'content-type: application/json' \ 
+--data-raw '{
+    "name": "aayush_test_dashboard"
+    }'

@@ -1,0 +1,35 @@
+curl -X PUT 'https://api2.arduino.cc/iot/v2/dashboards/2deabc26-4232-4a45-9ba7-ce05bea1f9a3' \ 
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2FwaTIuYXJkdWluby5jYy9pb3QiLCJhenAiOiJyeDBwaDVvckY1Y2RTZnhLdUFvZkI2Zkp0UUFHMWo5eCIsImV4cCI6MTY2NDI5NTkwOSwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIiwiaHR0cDovL2FyZHVpbm8uY2MvY2xpZW50X2lkIjoiYWF5dXNoX3Rlc3QiLCJodHRwOi8vYXJkdWluby5jYy9pZCI6IjNkMmQxMWEwLTc0YmEtNGI1OS05ZThiLWYyNjMwMzdkNjAwOSIsImh0dHA6Ly9hcmR1aW5vLmNjL3JhdGVsaW1pdCI6MTAsImh0dHA6Ly9hcmR1aW5vLmNjL3VzZXJuYW1lIjoibGlxdWltZWNoX3Rlc3RlciIsImlhdCI6MTY2NDI5NTYwOSwic3ViIjoicngwcGg1b3JGNWNkU2Z4S3VBb2ZCNmZKdFFBRzFqOXhAY2xpZW50cyJ9.YyQUU6_d2kk5qVzlUFnOpQRbXRIlEh9MvIwwqMHy_64' \
+--header 'content-type: application/json' \ 
+--data-raw '
+{
+  "created_by": {
+    "user_id": "3d2d11a0-74ba-4b59-9e8b-f263037d6009",
+    "username": "liquimech_tester"
+    },
+    "id": "2deabc26-4232-4a45-9ba7-ce05bea1f9a3",
+    "name": "aayush",
+    "widgets": [
+        {
+            "has_permission_incompatibility": false,
+            "has_type_incompatibility": false,
+            "height": 4,
+            "height_mobile": 4,
+            "id": "11111111-2222-3333-4444-555555555555",
+            "name": "LED",
+            "options": {
+                "icon": "switch",
+                "readOnly": false,
+                "section": "section-1",
+                "showLabels": true
+            },
+            "type": "Switch",
+            "width": 4,
+            "width_mobile": 4,
+            "x": 0,
+            "x_mobile": 0,
+            "y": 0,
+            "y_mobile": 0
+        }
+    ]
+}'

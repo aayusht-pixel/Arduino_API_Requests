@@ -1,0 +1,7 @@
+curl --request POST \
+  --url 'https://api2.arduino.cc/iot/v1/clients/token' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data 'grant_type=client_credentials' \
+  --data 'client_id=rx0ph5orF5cdSfxKuAofB6fJtQAG1j9x' \
+  --data 'client_secret=it8b8tyEVU3ANB3xq4nFrO2Py6uQSDSVJfRgR5Sj3LDRxZrf0Mwbu6xM3cy4pa46' \
+  --data 'audience=https://api2.arduino.cc/iot'
