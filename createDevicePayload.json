@@ -1,6 +1,0 @@
-{
-    "name": "Aayush_device2",
-    "serial": "9876",
-    "type": "login_and_secretkey_wifi",
-    "fqbn": "esp8266:esp8266:generic"
-}

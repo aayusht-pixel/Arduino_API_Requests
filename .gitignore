@@ -1,0 +1,6 @@
+getToken.js 
+*.json
+node_modules
+.vscode
+curl_files
+.gitignore
