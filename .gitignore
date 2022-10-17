@@ -3,4 +3,3 @@ getToken.js
 node_modules
 .vscode
 curl_files
-.gitignore

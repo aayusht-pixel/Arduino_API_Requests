@@ -11,4 +11,4 @@ git reset --(path to/getToken.js)
 ```
 
 ### Using ```.gitignore``` to manage important JSON files
-You need to include a .gitignore in the root of your workspace, containing a list of important files that need to be omitted during the push to a repo. A really informative webpage on (.gitignore)[https://www.atlassian.com/git/tutorials/saving-changes/gitignore] explains things clearly. 
+You need to include a .gitignore in the root of your workspace, containing a list of important files that need to be omitted during the push to a repo. A really informative webpage on [.gitignore](https://www.atlassian.com/git/tutorials/saving-changes/gitignore) explains things clearly. 
