@@ -1,11 +1,18 @@
 var IotApi = require('@arduino/arduino-iot-client');
 var rp = require('request-promise');
+var XMLHttpRequest = require('xhr2'); // required to make Http Requests through Node
 
+var payloadDevice = JSON.stringify(require('./createDevicePayload.json')); // include dashboard upadate in a JSON file
+// console.log(payloadDashboard); // display the payload in raw JSON format, for testing 
+
+// function for main access token 
 async function getToken() {
     var options = {
         method: 'POST',
         url: 'https://api2.arduino.cc/iot/v1/clients/token',
-        headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+        },
         json: true,
         form: {
             grant_type: 'client_credentials',
@@ -19,9 +26,30 @@ async function getToken() {
         const response = await rp(options);
         return response['access_token'];
     }
-    catch (error) {
+    catch (error) { 
         console.error("Failed getting an access token: " + error)
     }
+}
+
+// make PUT request to create a device
+async function myHttpRequest(myUrl, myMethod, myToken) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(myMethod, myUrl); // method to be used in the URL
+
+    xhr.setRequestHeader("Accept", "application/json"); // accept data in JSON 
+    xhr.setRequestHeader("Authorization", "Bearer " + myToken); // add Bearer access token from getToken()
+    xhr.setRequestHeader("Content-Type", "application/json"); // set payload content type as JSON 
+
+    // function to display stage change of XMLHttpRequest client
+    xhr.onreadystatechange = function () {
+        // check if the state an XMLHttpRequest client is in the DONE(==4) stage
+        if (xhr.readyState === 4) {
+            console.log(xhr.status); // display status
+            console.log(xhr.responseText); // display response text
+        }
+    };
+
+    xhr.send(payloadDevice); // send Http Request
 }
 
 async function run() {
@@ -30,18 +58,10 @@ async function run() {
     var oauth2 = client.authentications['oauth2'];
     oauth2.accessToken = await getToken();
 
-    var api = new IotApi.DevicesV2Api()
-    var createDevicesV2Payload = {
-        name: 'Aayush',
-        serial: '1234',
-        type: 'login_and_secretkey_wifi',
-        fqbn: 'esp8266:esp8266:generic'
-    }; // {CreateDevicesV2Payload} 
-    api.devicesV2Create(createDevicesV2Payload).then(function (data) {
-        console.log('API called successfully. Returned data: ' + data);
-    }, function (error) {
-        console.error(error);
-    });
+    var url = 'https://api2.arduino.cc/iot/v2/devices'; // URL of target to create a device
+    var targetMethod = 'PUT'; // method to be used in the URL
+
+    myHttpRequest(url, targetMethod, oauth2.accessToken);
 }
 
 run();

@@ -28,27 +28,19 @@ async function getToken() {
     }
 }
 
-async function run() {
-    var client = IotApi.ApiClient.instance;
-    // Configure OAuth2 access token for authorization: oauth2
-    var oauth2 = client.authentications['oauth2'];
-    oauth2.accessToken = await getToken();
-
-    var api = new IotApi.DashboardsV2Api(client)
-
-    var url = 'https://api2.arduino.cc/iot/v2/dashboards';  // URL of target
-
+// make POST request to create a new dashboard
+async function myHttpRequest(myUrl, myMethod, myToken) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", url); // method to be used in the URL
+    xhr.open(myMethod, myUrl); // method to be used in the URL
 
     xhr.setRequestHeader("Accept", "application/json"); // accept data in JSON 
-    xhr.setRequestHeader("Authorization", "Bearer " + oauth2.accessToken); // add Bearer access token from getToken()
+    xhr.setRequestHeader("Authorization", "Bearer " + myToken); // add Bearer access token from getToken()
     xhr.setRequestHeader("Content-Type", "application/json"); // set payload content type as JSON 
 
-    // functiont to display stage change of XMLHttpRequest client
+    // function to display stage change of XMLHttpRequest client
     xhr.onreadystatechange = function () {
         // check if the state an XMLHttpRequest client is in the DONE(==4) stage
-        if (xhr.readyState === 4) { 
+        if (xhr.readyState === 4) {
             console.log(xhr.status); // display status
             console.log(xhr.responseText); // display response text
         }
@@ -57,8 +49,19 @@ async function run() {
     //Dashboardv2Create Payload
     var dashboardv2 = '{"name": "Aayush"}';
 
-    xhr.send(dashboardv2); // send Http Request 
+    xhr.send(dashboardv2); // send Http Request
+}
 
+async function run() {
+    var client = IotApi.ApiClient.instance;
+    // Configure OAuth2 access token for authorization: oauth2
+    var oauth2 = client.authentications['oauth2'];
+    oauth2.accessToken = await getToken();
+
+    var url = 'https://api2.arduino.cc/iot/v2/dashboards';  // URL of target
+    var targetMethod = 'POST';
+
+    myHttpRequest(url, targetMethod, oauth2.accessToken);
 }
 
 run();
