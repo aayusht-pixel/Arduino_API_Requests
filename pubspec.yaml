@@ -39,6 +39,8 @@ dependencies:
   syncfusion_flutter_gauges: ^20.3.57
   syncfusion_flutter_sliders: ^20.3.57
   switcher_button: ^0.0.4
+  http: ^0.13.5
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:

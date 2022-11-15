@@ -6,8 +6,34 @@ import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:switcher_button/switcher_button.dart';
 
+// for making http requests
+import 'package:http/http.dart' as http;
+
 void main() {
   return runApp(MainPage());
+}
+
+void getDashboard() async {
+  // var response = await http.get(
+  //   Uri.parse(
+  //       'https://api2.arduino.cc/iot/v2/dashboards/2deabc26-4232-4a45-9ba7-ce05bea1f9a3'),
+  //   headers: {
+  //     'Authorization': 'Bearer <--your-token-here-->',
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/json'
+  //   },
+  // );
+
+  var url = Uri.https('https://api2.arduino.cc/iot/v2/devices/');
+  var response = await http.get(url, headers: {
+    // 'Authorization': 'Bearer <--your-token-here-->',
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  });
+  print('Response status: ${response.statusCode}');
+  print('Response body: ${response.body}');
+
+  print(await http.read(Uri.https('https://api2.arduino.cc/iot/v2/devices/')));
 }
 
 class MainPage extends StatefulWidget {
@@ -20,6 +46,7 @@ class MyApp extends State<MainPage> {
   bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
+    getDashboard();
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: const Text('My Dashboard')),

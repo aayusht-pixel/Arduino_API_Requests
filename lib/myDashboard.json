@@ -1,0 +1,305 @@
+{
+    "created_by": {
+        "user_id": "3d2d11a0-74ba-4b59-9e8b-f263037d6009",
+        "username": "liquimech_tester"
+    },
+    "id": "2deabc26-4232-4a45-9ba7-ce05bea1f9a3",
+    "name": "aayush",
+    "updated_at": "2022-11-15T11:15:42.591085Z",
+    "widgets": [
+        {
+            "has_permission_incompatibility": false,
+            "has_type_incompatibility": false,
+            "has_unlinked_variable": false,
+            "height": 4,
+            "height_mobile": 4,
+            "id": "88888888-7777-4444-5555-222222222222",
+            "name": "Value",
+            "options": {
+                "icon": "value",
+                "readOnly": false,
+                "section": "section-3",
+                "showLabels": true,
+                "showThing": true,
+                "thingId": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a"
+            },
+            "type": "Value",
+            "variables": [
+                {
+                    "id": "be613b98-4b34-4240-a5de-78698689f6e1",
+                    "last_value": 123456,
+                    "last_value_updated_at": "2022-10-07T05:59:49.986Z",
+                    "name": "aayush_random_value",
+                    "permission": "READ_WRITE",
+                    "thing_id": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a",
+                    "thing_name": "aayush_thing",
+                    "thing_timezone": {
+                        "name": "America/New_York",
+                        "offset": -18000,
+                        "until": "2023-03-12T07:00:00Z"
+                    },
+                    "type": "INT",
+                    "variable_name": "aayush_random_value"
+                }
+            ],
+            "width": 4,
+            "width_mobile": 4,
+            "x": 4,
+            "x_mobile": 4,
+            "y": 5,
+            "y_mobile": 15
+        },
+        {
+            "has_permission_incompatibility": false,
+            "has_type_incompatibility": false,
+            "has_unlinked_variable": false,
+            "height": 4,
+            "height_mobile": 4,
+            "id": "00000000-9999-8888-7777-666666666655",
+            "name": "Status",
+            "options": {
+                "icon": "switch",
+                "readOnly": false,
+                "section": "section-2",
+                "showLabels": true,
+                "showThing": true,
+                "thingId": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a"
+            },
+            "type": "Status",
+            "variables": [
+                {
+                    "id": "9cc7fc96-ced6-4696-88f8-464611f69b5d",
+                    "last_value": true,
+                    "last_value_updated_at": "2022-11-15T11:15:28.106Z",
+                    "name": "aayush_led_switch",
+                    "permission": "READ_WRITE",
+                    "thing_id": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a",
+                    "thing_name": "aayush_thing",
+                    "thing_timezone": {
+                        "name": "America/New_York",
+                        "offset": -18000,
+                        "until": "2023-03-12T07:00:00Z"
+                    },
+                    "type": "STATUS",
+                    "variable_name": "aayush_led_switch"
+                }
+            ],
+            "width": 4,
+            "width_mobile": 4,
+            "x": 0,
+            "x_mobile": 0,
+            "y": 0,
+            "y_mobile": 0
+        },
+        {
+            "has_permission_incompatibility": false,
+            "has_type_incompatibility": false,
+            "has_unlinked_variable": false,
+            "height": 4,
+            "height_mobile": 4,
+            "id": "11111111-2222-3333-4444-555555555556",
+            "name": "Switch",
+            "options": {
+                "icon": "switch",
+                "readOnly": false,
+                "section": "section-1",
+                "showLabels": true,
+                "showThing": true,
+                "thingId": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a"
+            },
+            "type": "Switch",
+            "variables": [
+                {
+                    "id": "9cc7fc96-ced6-4696-88f8-464611f69b5d",
+                    "last_value": true,
+                    "last_value_updated_at": "2022-11-15T11:15:28.106Z",
+                    "name": "aayush_led_switch",
+                    "permission": "READ_WRITE",
+                    "thing_id": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a",
+                    "thing_name": "aayush_thing",
+                    "thing_timezone": {
+                        "name": "America/New_York",
+                        "offset": -18000,
+                        "until": "2023-03-12T07:00:00Z"
+                    },
+                    "type": "STATUS",
+                    "variable_name": "aayush_led_switch"
+                }
+            ],
+            "width": 4,
+            "width_mobile": 4,
+            "x": 0,
+            "x_mobile": 0,
+            "y": 4,
+            "y_mobile": 0
+        },
+        {
+            "has_permission_incompatibility": false,
+            "has_type_incompatibility": false,
+            "has_unlinked_variable": false,
+            "height": 4,
+            "height_mobile": 4,
+            "id": "89269346-8038-457b-ac85-75a8f24690cb",
+            "name": "Value2",
+            "options": {
+                "icon": "value",
+                "readOnly": false,
+                "section": "section-2",
+                "showThing": true,
+                "thingId": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a"
+            },
+            "type": "Value",
+            "variables": [
+                {
+                    "id": "722dc691-60e2-4615-bcc9-97c1ec0f0085",
+                    "last_value": 47,
+                    "last_value_updated_at": "2022-10-16T08:13:17.667Z",
+                    "name": "aayush_int_value",
+                    "permission": "READ_WRITE",
+                    "thing_id": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a",
+                    "thing_name": "aayush_thing",
+                    "thing_timezone": {
+                        "name": "America/New_York",
+                        "offset": -18000,
+                        "until": "2023-03-12T07:00:00Z"
+                    },
+                    "type": "INT",
+                    "variable_name": "aayush_int_value"
+                }
+            ],
+            "width": 4,
+            "width_mobile": 4,
+            "x": 4,
+            "x_mobile": 0,
+            "y": 0,
+            "y_mobile": 4
+        },
+        {
+            "has_permission_incompatibility": false,
+            "has_type_incompatibility": false,
+            "has_unlinked_variable": false,
+            "height": 5,
+            "height_mobile": 5,
+            "id": "db4fc1cf-08a0-458d-bf73-e41bb2afd803",
+            "name": "Slider",
+            "options": {
+                "icon": "slider",
+                "max": 100,
+                "min": 0,
+                "readOnly": false,
+                "section": "section-1",
+                "thingId": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a",
+                "vertical": false
+            },
+            "type": "Slider",
+            "variables": [
+                {
+                    "id": "086f5360-082c-4982-bf97-4ca487857352",
+                    "last_value": 36,
+                    "last_value_updated_at": "2022-11-15T11:15:41.725Z",
+                    "name": "aayush_slider",
+                    "permission": "READ_WRITE",
+                    "thing_id": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a",
+                    "thing_name": "aayush_thing",
+                    "thing_timezone": {
+                        "name": "America/New_York",
+                        "offset": -18000,
+                        "until": "2023-03-12T07:00:00Z"
+                    },
+                    "type": "INT",
+                    "variable_name": "aayush_slider"
+                }
+            ],
+            "width": 6,
+            "width_mobile": 6,
+            "x": 12,
+            "x_mobile": 0,
+            "y": 0,
+            "y_mobile": 8
+        },
+        {
+            "has_permission_incompatibility": false,
+            "has_type_incompatibility": false,
+            "has_unlinked_variable": false,
+            "height": 6,
+            "height_mobile": 6,
+            "id": "ed5bd231-e51b-49b9-b50f-f29ed7339db1",
+            "name": "Gauge",
+            "options": {
+                "icon": "gauge",
+                "max": 100,
+                "min": 0,
+                "readOnly": false,
+                "section": "section-2",
+                "showThing": false,
+                "thingId": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a"
+            },
+            "type": "Gauge",
+            "variables": [
+                {
+                    "id": "086f5360-082c-4982-bf97-4ca487857352",
+                    "last_value": 36,
+                    "last_value_updated_at": "2022-11-15T11:15:41.725Z",
+                    "name": "aayush_slider",
+                    "permission": "READ_WRITE",
+                    "thing_id": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a",
+                    "thing_name": "aayush_thing",
+                    "thing_timezone": {
+                        "name": "America/New_York",
+                        "offset": -18000,
+                        "until": "2023-03-12T07:00:00Z"
+                    },
+                    "type": "INT",
+                    "variable_name": "aayush_slider"
+                }
+            ],
+            "width": 6,
+            "width_mobile": 6,
+            "x": 18,
+            "x_mobile": 0,
+            "y": 0,
+            "y_mobile": 19
+        },
+        {
+            "has_permission_incompatibility": false,
+            "has_type_incompatibility": false,
+            "has_unlinked_variable": false,
+            "height": 4,
+            "height_mobile": 4,
+            "id": "8c174c04-052f-4fee-9c14-ddb55147a49d",
+            "name": "ESP8266_value",
+            "options": {
+                "icon": "value",
+                "readOnly": false,
+                "section": "section-2",
+                "showThing": true,
+                "thingId": "eef01800-b71d-429c-ad60-3d404e3bcd2e"
+            },
+            "type": "Value",
+            "variables": [
+                {
+                    "id": "5c947439-c391-4f99-8a2a-8d2a1b12c5c7",
+                    "last_value": 9,
+                    "last_value_updated_at": "2022-08-15T16:05:26.853Z",
+                    "name": "random_value",
+                    "permission": "READ_WRITE",
+                    "thing_id": "eef01800-b71d-429c-ad60-3d404e3bcd2e",
+                    "thing_name": "Untitled",
+                    "thing_timezone": {
+                        "name": "Indian/Mauritius",
+                        "offset": 14400,
+                        "until": "2106-02-07T06:28:15Z"
+                    },
+                    "type": "INT",
+                    "variable_name": "random_value"
+                }
+            ],
+            "width": 4,
+            "width_mobile": 4,
+            "x": 8,
+            "x_mobile": 4,
+            "y": 0,
+            "y_mobile": 4
+        }
+    ]
+}
