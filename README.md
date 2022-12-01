@@ -6,6 +6,19 @@ The basic flow of making API requests can be listed below:
 - Request the access token using your ```client_id``` and ```client_credentials```.
 - Authenticate a targeted function using a header by including the access token as a bearer.
 
+### Installing the XMLHttpRequest module
+XMLHttpRequest is a built-in object in web browsers, and not included in Node. A third-party implementation for using XMLHttpRequest is ```xhr2```.
+You can install it with npm.
+```cpp
+npm install xhr2
+```
+And then require it in your code.
+```node
+var XMLHttpRequest = require('xhr2');
+var xhr = new XMLHttpRequest();
+```
+
+
 ### Include your own ```getToken``` function
 I have avoided including my ```getToken``` (shown in the official Arduino IoT Cloud documentation) function, as it includes my ```client_id``` and ```client_credentials```, which is unique to my Arduino Cloud account profile. To do this for yourself, you can omit its inclusion to your commit by running the following commands in your terminal.
 ```cpp
