@@ -13,6 +13,8 @@ import 'package:led_bulb_indicator/led_bulb_indicator.dart';
 import 'package:http/http.dart' as http;
 import 'package:web_socket_channel/io.dart';
 
+// global variable to store access token
+// unsafe, will look for better methods to store access token
 String accessToken = '';
 
 void main() {
@@ -155,6 +157,29 @@ Future<http.Response?> publishSliderProperty(sliderValue) async {
   );
 }
 
+
+Future<http.Response?> getThingProperties() async {
+  var url = Uri.parse(
+      'https://api2.arduino.cc/iot/v2/things/7ea1ea47-9ca5-4805-94eb-8185d489ac1a');
+  var response = await http.get(
+    url,
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $accessToken',
+      'Content-Type': 'application/json'
+    },
+  ).then(
+    (response) {
+      if (response.statusCode == 200) {
+        var data = json.decode(response.body);
+        print(data); // print response after JSON conversion
+      } else {
+        throw Exception('Failed to load properties');
+      }
+    },
+  );
+}
+
 class MainPage extends StatefulWidget {
   MyApp createState() => MyApp();
 }
@@ -165,6 +190,7 @@ class MyApp extends State<MainPage> {
   bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
+    getThingProperties();
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(title: const Text('My Dashboard')),
@@ -230,7 +256,7 @@ class MyApp extends State<MainPage> {
                                       widget: Container(
                                           child: Text('$_value',
                                               style: TextStyle(
-                                                  fontSize: 25,
+                                                  fontSize: 15,
                                                   fontWeight:
                                                       FontWeight.bold))),
                                       angle: 90,
