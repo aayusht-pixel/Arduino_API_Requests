@@ -13,6 +13,8 @@ import 'package:led_bulb_indicator/led_bulb_indicator.dart';
 import 'package:http/http.dart' as http;
 import 'package:web_socket_channel/io.dart';
 
+// import 'package:my_liquimech_dashboards/api_service.dart';
+
 // global variable to store access token
 // unsafe, will look for better methods to store access token
 String accessToken = '';
@@ -61,9 +63,9 @@ Future<http.Response?> getDashboard() async {
   ).then(
     (response) {
       if (response.statusCode == 200) {
-        print('Response body: ${response.body}'); // print raw response
-        var data = json.decode(response.body);
-        print(data); // print response after JSON conversion
+        //print('Response body: ${response.body}'); // print raw response
+        //var data = json.decode(response.body);
+        //print(data); // print response after JSON conversion
       } else {
         throw Exception('Failed to load dashboard');
       }
@@ -76,6 +78,7 @@ Future<http.Response?> getDashboard() async {
 Future<http.Response?> publishSwitchProperty(switchValue) async {
   var url = Uri.parse(
       'https://api2.arduino.cc/iot/v2/things/7ea1ea47-9ca5-4805-94eb-8185d489ac1a/properties/9cc7fc96-ced6-4696-88f8-464611f69b5d/publish');
+
   var response = await http
       .put(
     url,
@@ -156,7 +159,6 @@ Future<http.Response?> publishSliderProperty(sliderValue) async {
     },
   );
 }
-
 
 Future<http.Response?> getThingProperties() async {
   var url = Uri.parse(
