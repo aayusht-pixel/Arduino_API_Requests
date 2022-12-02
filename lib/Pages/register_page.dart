@@ -7,6 +7,10 @@ import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 import 'package:snippet_coder_utils/hex_color.dart';
 
+import '../config.dart';
+import '../models/register_request_model.dart';
+import '../services/api_service.dart';
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -20,6 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
   String? username;
   String? password;
+  String? email;
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +116,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 "password",
                 "Password", (onValidateVal) {
               if (onValidateVal.isEmpty) {
-                return "Password Can\t be empty";
+                //return "Password Can\t be empty";
+                return TextSpan(
+                  text: "Password Can\t be empty\n",
+                  style: TextStyle(color: Colors.white.withOpacity(0.8)),
+                );
               }
               return null;
             }, (onSavedVal) {
@@ -160,7 +169,41 @@ class _RegisterPageState extends State<RegisterPage> {
           Center(
             child: FormHelper.submitButton(
               "Register",
-              () {},
+              () {
+                if (validateAndSave()) {
+                  setState(() {
+                    isAPIcallProcess = true;
+                  });
+                  RegisterRequestModel model = RegisterRequestModel(
+                      username: username!,
+                      password: password!,
+                      email: email!,
+                      roles: ["user"]);
+                  APIService.register(model).then((response) {
+                    setState(() {
+                      isAPIcallProcess = true;
+                    });
+                    if (response != null) {
+                      FormHelper.showSimpleAlertDialog(
+                          context,
+                          Config.appName,
+                          "Registration Succesfull. Please Login to the Account",
+                          "OK", () {
+                        Navigator.pop(context);
+                      });
+
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/login', (route) => false);
+                    }
+                  });
+                } else {
+                  FormHelper.showSimpleAlertDialog(
+                      context, Config.appName, "User Unable to Regitser", "OK",
+                      () {
+                    Navigator.pop(context);
+                  });
+                }
+              },
               btnColor: HexColor("#EE4B2B"),
               borderColor: Colors.white,
               borderRadius: 10,
@@ -176,5 +219,15 @@ class _RegisterPageState extends State<RegisterPage> {
         ],
       ),
     );
+  }
+
+  bool validateAndSave() {
+    final form = globalFormKey.currentState;
+    if (form!.validate()) {
+      form.save();
+      return true;
+    } else {
+      return false;
+    }
   }
 }

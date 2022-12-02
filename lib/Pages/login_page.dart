@@ -3,9 +3,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:liquimech_app/models/login_request_model.dart';
+import 'package:liquimech_app/services/api_service.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:snippet_coder_utils/ProgressHUD.dart';
 import 'package:snippet_coder_utils/hex_color.dart';
+import '../config.dart';
 import './register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -161,7 +164,30 @@ class _LoginPageState extends State<LoginPage> {
           Center(
             child: FormHelper.submitButton(
               "Login",
-              () {},
+              () {
+                if (validateAndSave()) {
+                  setState(() {
+                    isAPIcallProcess = true;
+                  });
+                  LoginRequestModel model = LoginRequestModel(
+                      username: username!, password: password!);
+
+                  APIService.login(model).then((response) {
+                    setState(() {
+                      isAPIcallProcess = false;
+                    });
+                    if (response) {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/home', (route) => false);
+                    }
+                  });
+                } else {
+                  FormHelper.showSimpleAlertDialog(context, Config.appName,
+                      "Invalid Username / Password", "OK", () {
+                    Navigator.pop(context);
+                  });
+                }
+              },
               btnColor: HexColor("#EE4B2B"),
               borderColor: Colors.white,
               borderRadius: 10,
@@ -206,5 +232,15 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  bool validateAndSave() {
+    final form = globalFormKey.currentState;
+    if (form!.validate()) {
+      form.save();
+      return true;
+    } else {
+      return false;
+    }
   }
 }
