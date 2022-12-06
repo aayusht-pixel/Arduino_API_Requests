@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'package:liquimech_app/models/login_response_model.dart';
 import 'package:liquimech_app/services/shared_service.dart';
@@ -20,8 +21,9 @@ class APIService {
     var response = await client.post(
       url,
       headers: requestHeaders,
-      body: jsonEncode(model.toJSON()),
+      body: jsonEncode(model),
     );
+
     if (response.statusCode == 200) {
       await SharedService.setLoginDetails(loginResponseJson(response.body));
 
@@ -35,6 +37,7 @@ class APIService {
       RegisterRequestModel model) async {
     Map<String, String> requestHeaders = {
       'content-Type': 'application/json',
+      'Charset': 'utf-8'
     };
 
     var url = Uri.http(Config.apiURL, Config.registerAPI);
@@ -42,8 +45,10 @@ class APIService {
     var response = await client.post(
       url,
       headers: requestHeaders,
-      body: jsonEncode(model.toJSON()),
+      body: jsonEncode(model),
     );
-    return registerResponseModel(response.body);
+    print(response);
+
+    return RegisterResponseModel.fromJson(jsonDecode(response.body));
   }
 }

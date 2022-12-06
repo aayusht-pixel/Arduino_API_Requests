@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
               }
               return null;
             }, (onSavedVal) {
-              username = onSavedVal;
+              password = onSavedVal;
             },
                 borderFocusColor: Colors.white,
                 borderColor: Colors.white,

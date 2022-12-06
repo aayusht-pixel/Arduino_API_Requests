@@ -116,15 +116,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 "password",
                 "Password", (onValidateVal) {
               if (onValidateVal.isEmpty) {
-                //return "Password Can\t be empty";
-                return TextSpan(
-                  text: "Password Can\t be empty\n",
-                  style: TextStyle(color: Colors.white.withOpacity(0.8)),
-                );
+                return "Password Can\t be empty";
               }
               return null;
             }, (onSavedVal) {
-              username = onSavedVal;
+              password = onSavedVal;
             },
                 borderFocusColor: Colors.white,
                 borderColor: Colors.white,
@@ -151,11 +147,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 "email",
                 "Email", (onValidateVal) {
               if (onValidateVal.isEmpty) {
-                return "User Name Can\t be empty";
+                return "Email Can\t be empty";
               }
               return null;
             }, (onSavedVal) {
-              username = onSavedVal;
+              email = onSavedVal;
             },
                 borderFocusColor: Colors.white,
                 borderColor: Colors.white,
@@ -190,10 +186,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           "Registration Succesfull. Please Login to the Account",
                           "OK", () {
                         Navigator.pop(context);
+                        print(response);
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/login', (route) => false);
                       });
-
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, '/login', (route) => false);
                     }
                   });
                 } else {
