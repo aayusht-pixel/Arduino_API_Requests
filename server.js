@@ -21,6 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 const db = require("../liquumech_api/models");
 const Role = db.role;
 
+//db.sequelize.sync(); //uncomment this when already exist database tables and avoid droping data
+
 db.sequelize.sync({ force: true }).then(() => {
     console.log('Drop and Resync Db');
     initial();
