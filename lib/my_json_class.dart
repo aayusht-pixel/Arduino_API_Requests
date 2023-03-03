@@ -1,3 +1,9 @@
+// this class is used to capture the variables used in a "thing"
+// specifically, it captures all of the variables when using a "show properties" method in a "thing"
+
+// to use this class, create a different instance of it for each instance of a "property" for a "thing"
+// the variable for each instance is then used to generate and populate a widget associated with it
+
 // To parse this JSON data, do
 // final myJsonClass = myJsonClassFromJson(jsonString);
 

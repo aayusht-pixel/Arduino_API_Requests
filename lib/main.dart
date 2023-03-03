@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:my_liquimech_dashboards/api_service.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:switcher_button/switcher_button.dart';
@@ -13,7 +14,7 @@ import 'package:led_bulb_indicator/led_bulb_indicator.dart';
 import 'package:http/http.dart' as http;
 import 'package:web_socket_channel/io.dart';
 
-// import 'package:my_liquimech_dashboards/api_service.dart';
+import 'package:my_liquimech_dashboards/api_service.dart';
 
 // global variable to store access token
 // unsafe, will look for better methods to store access token
@@ -37,10 +38,10 @@ Future<http.Response?> getToken() async {
       'audience': 'https://api2.arduino.cc/iot'
     },
   ).then(
-    (response) {
+    (response) async {
       if (response.statusCode == 200) {
         var responseData = json.decode(response.body);
-        accessToken = responseData['access_token'];
+        accessToken = await responseData['access_token'];
         return accessToken;
       } else {
         print('Error');
@@ -64,8 +65,8 @@ Future<http.Response?> getDashboard() async {
     (response) {
       if (response.statusCode == 200) {
         //print('Response body: ${response.body}'); // print raw response
-        //var data = json.decode(response.body);
-        //print(data); // print response after JSON conversion
+        Map data = json.decode(response.body);
+        print(data); // print response after JSON conversion
       } else {
         throw Exception('Failed to load dashboard');
       }
@@ -77,7 +78,7 @@ Future<http.Response?> getDashboard() async {
 // variable can be found in aayush_thing
 Future<http.Response?> publishSwitchProperty(switchValue) async {
   var url = Uri.parse(
-      'https://api2.arduino.cc/iot/v2/things/7ea1ea47-9ca5-4805-94eb-8185d489ac1a/properties/9cc7fc96-ced6-4696-88f8-464611f69b5d/publish');
+      'https://api2.arduino.cc/iot/v2/things/1c5b2209-c194-4272-8132-20e47933336e/properties/d6ac601e-bf9c-4001-8938-1e9fbd9e6a12/publish');
 
   var response = await http
       .put(
@@ -90,20 +91,19 @@ Future<http.Response?> publishSwitchProperty(switchValue) async {
     // payload to publish on thing property
     body: jsonEncode({
       "href":
-          "/iot/v1/things/7ea1ea47-9ca5-4805-94eb-8185d489ac1a/properties/9cc7fc96-ced6-4696-88f8-464611f69b5d",
-      "id": "9cc7fc96-ced6-4696-88f8-464611f69b5d",
-      "device_id": "ea726baa-f244-495a-b70d-b779be76268f",
-      "value": switchValue, // boolean value based on switch state
-      "name": "aayush_led_switch",
+          "/iot/v1/things/1c5b2209-c194-4272-8132-20e47933336e/properties/d6ac601e-bf9c-4001-8938-1e9fbd9e6a12",
+      "id": "d6ac601e-bf9c-4001-8938-1e9fbd9e6a12",
+      "value": switchValue,
+      "name": "led_state",
       "permission": "READ_WRITE",
       "persist": true,
-      "tag": 4,
-      "thing_id": "7ea1ea47-9ca5-4805-94eb-8185d489ac1a",
-      "thing_name": "aayush_thing",
+      "tag": 2,
+      "thing_id": "1c5b2209-c194-4272-8132-20e47933336e",
+      "thing_name": "LV006",
       "type": "STATUS",
       "update_parameter": 0,
       "update_strategy": "ON_CHANGE",
-      "variable_name": "aayush_led_switch"
+      "variable_name": "led_state"
     }),
   )
       .then(
@@ -182,6 +182,77 @@ Future<http.Response?> getThingProperties() async {
   );
 }
 
+String apiUrl(String thingId, String propertyId) {
+  return "https://api2.arduino.cc/iot/v2/things/$thingId/properties/$propertyId";
+}
+
+Future<dynamic> getUserProperties(
+  List<String>? userPropertiesThings,
+  String clientId,
+  String clientSecret,
+) async {
+  // Add your function code here!
+  List<dynamic> results = [];
+  for (String item in userPropertiesThings!) {
+    List<String> data = item.split("|&=&|");
+    String thingId = data[1];
+    String propertyId = data[0];
+    String url = apiUrl(thingId, propertyId);
+    http.Response response = await http.get(
+      Uri.parse(url),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $accessToken',
+        'Content-Type': 'application/json'
+      },
+    );
+    dynamic jsonResponse = json.decode(response.body);
+    results.add(jsonResponse);
+  }
+  print(results);
+  return results;
+}
+
+// Geeyas code start
+class PropertyData {
+  String propertyName;
+  String propertyWidget;
+  dynamic apiResponse;
+  PropertyData(
+      {this.propertyName = "", this.propertyWidget = "", this.apiResponse});
+  factory PropertyData.fromJson(Map<String, dynamic> json) {
+    return PropertyData(
+      propertyName: json['propertyName'] ?? "",
+      propertyWidget: json['propertyWidget'] ?? "",
+      apiResponse: json['apiResponse'],
+    );
+  }
+}
+Future<List<PropertyData>> iterateMapAndRetrieveValues(
+    Map<int, Map<String, dynamic>> data) async {
+  List<PropertyData> results = [];
+  for (int index in data.keys) {
+    Map<String, dynamic>? map = data[index];
+    String propertyId = map!['property_id'];
+    String thingId = map['thing_id'];
+    String apiUrl =
+        "https://api2.arduino.cc/iot/v2/things/$propertyId/properties/$thingId";
+    final response = await http.get(Uri.parse(apiUrl));
+    if (response.statusCode == 200) {
+      PropertyData propertyData = PropertyData.fromJson({
+        'propertyName': map['property_name'],
+        'propertyWidget': map['property_widget'],
+        'apiResponse': json.decode(response.body),
+      });
+      results.add(propertyData);
+    } else {
+      print("Error: ${response.statusCode}");
+    }
+  }
+  return results;
+}
+// Geeyas code end
+
 class MainPage extends StatefulWidget {
   MyApp createState() => MyApp();
 }
@@ -192,7 +263,21 @@ class MyApp extends State<MainPage> {
   bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
-    getThingProperties();
+    //getToken(); // get token from within this file
+    // MY MODIFICATIONS START
+    getToken();
+    getUserProperties(
+      [
+        "b0af9f4d-8b07-4994-9626-b595b892a171|&=&|7b73b05b-f62b-4f91-aecd-aa6e6745c46f",
+        "722dc691-60e2-4615-bcc9-97c1ec0f0085|&=&|7ea1ea47-9ca5-4805-94eb-8185d489ac1a"
+      ],
+      'rx0ph5orF5cdSfxKuAofB6fJtQAG1j9x',
+      'it8b8tyEVU3ANB3xq4nFrO2Py6uQSDSVJfRgR5Sj3LDRxZrf0Mwbu6xM3cy4pa46',
+    );
+    //var myToken = await ApiService().getToken(); // get token from ApiService class
+    //print('Printing passed token now!');
+    //print (myToken); // print token received from ApiService class;
+    // MY MODIFICATIONS END
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(title: const Text('My Dashboard')),
